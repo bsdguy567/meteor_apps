@@ -31,17 +31,13 @@ class TodosListCtrl {
                         createdAt: -1
                     }
                 });
-            }
         })
     }
 
 
     addTask(newTask) {
         // Insert a task into the collection
-        Tasks.insert({
-            text: newTask,
-            createdAt: new Date
-        });
+        Tasks.insert({text: newTask, createdAt: new Date});
 
         // Clear form
         this.newTask = '';
