@@ -2,18 +2,18 @@
     <h1>Todo List ( {{$ctrl.incompleteCount}} )</h1>
 
     <label class="hide-completed">
-        <input type="checkbox" data-ng-model="$ctrl.hideCompleted" /> 
+        <input type="checkbox" data-ng-model="$ctrl.hideCompleted" />
     </label>
 
     <login-buttons></login-buttons>
-    
-<form class="new-task" data-ng-submit="$ctrl.addTask($ctrl.newTask)" data-ng-show="$ctrl.currentUser">
-    <input data-ng-model="$ctrl.newTask" type="text" name="text" placeholder="Type to add new tasks" />
-</form>
 
+    <form class="new-task" data-ng-submit="$ctrl.addTask($ctrl.newTask)" data-ng-show="$ctrl.currentUser">
+        <input data-ng-model="$ctrl.newTask" type="text" name="text" placeholder="Type to add new tasks" />
+    </form>
 </header>
+
 <ul>
-    <li data-ng-repeat="task in $ctrl.tasks" data-ng-class="{'checked': task.checked}">
+    <li data-ng-repeat="task in $ctrl.tasks" data-ng-class="{'checked': task.checked, 'private': task.private}">
         <button class="delete" data-ng-click="$ctrl.removeTask(task)">&times;</button>
 
         <input type="checkbox" data-ng-checked="task.checked" data-ng-click="$ctrl.setChecked(task)" class="toggle-checked" />
@@ -21,5 +21,9 @@
         <span class="text">
             <strong>{{task.username}}</strong> - {{task.text}}
         </span>
+        
+        <button class="toggle-private" data-ng-click="$ctrl.setPrivate(task)" data-ng-show="task.owner === $ctrl.currentUser._id">
+            {{task.private == true ? "Private" : "Public"}}
+        </button>
     </li>
 </ul>
